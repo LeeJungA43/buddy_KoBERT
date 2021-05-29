@@ -11,17 +11,17 @@ buddy_KoBERT
 
 환경
 --------------
-###전제조건
-+Python 3
-+Colab pro
+### 전제조건
+ + Python 3
+ + Colab pro
 
-###Data
-+[AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence): AIhub 가입 및 신청 후 승인되면 다운로드가 가능하다.
+### Data
+ + [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence): AIhub 가입 및 신청 후 승인되면 다운로드가 가능하다.
 
-###Package
-+kobert-transformers
-+transformers==3.0.2
-+torch
+### Package
+ + kobert-transformers
+ + transformers==3.0.2
+ + torch
 
 Data 전처리
 -------------
