@@ -93,7 +93,7 @@ class KoBERTforSequenceClassfication(BertPreTrainedModel):
  
 해당 모델은 사용자의 발화(Question)의 Category를 분류하는 다중분류 모델이다.
 
-학습의 간편함을 위하여 Answer의 Category를 숫자로 바꾸었다.
+학습의 간편함을 위하여 Question의 Category를 숫자로 바꾸었다.
 
  ##### Classification Data
  ```
@@ -141,7 +141,11 @@ Question: 고마워, 이만 종료해줘 버디.
 Reference
 ---------------------------
 [KoBERT](https://github.com/SKTBrain/KoBERT)
+
 [KoBERT-Transformers](https://github.com/monologg/KoBERT-Transformers)
+
 [enlipleai/kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
+
 [how-to-generate-text](https://huggingface.co/blog/how-to-generate?fbclid=IwAR2BZ4BNG0PbOvS5QaPLE0L3lx7_GOy_ePVu4X1LyTktQo-nLEPr7eht1O0)
+
 [WellnessConversation-LanguageModel](https://github.com/nawnoes/WellnessConversation-LanguageModel)
