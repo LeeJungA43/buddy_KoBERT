@@ -3,6 +3,7 @@ buddy_KoBERT
 `huggingface transformers`, `pytorch`, `KoBERT Model`과 [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence)을 활용한 심리상담 모델이다.
  
 
+
 개요
 --------------
 언어모델 `KoBERT`에 대해 `text classification` Fine-Tuning 및 테스트를 진행했다.
@@ -23,6 +24,53 @@ buddy_KoBERT
  + transformers==3.0.2
  + torch
 
+
 Data 전처리
 -------------
+### KoBERT Text Classification
+```
+class KoBERTforSequenceClassfication(BertPreTrainedModel):
+  def __init__(self,
+                num_labels = 359,
+                hidden_size = 768,
+                hidden_dropout_prob = 0.1,
+               ):
+    super().__init__(get_kobert_config())
+
+    self.num_labels = num_labels
+    self.kobert = get_kobert_model()
+    self.dropout = nn.Dropout(hidden_dropout_prob)
+    self.classifier = nn.Linear(hidden_size, num_labels)
+
+    self.init_weights()
+
+  def forward(
+          self,
+          input_ids=None,
+          attention_mask=None,
+          token_type_ids=None,
+          position_ids=None,
+          head_mask=None,
+          inputs_embeds=None,
+          labels=None,
+  ):
+  ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
