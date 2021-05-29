@@ -54,7 +54,7 @@ class KoBERTforSequenceClassfication(BertPreTrainedModel):
           inputs_embeds=None,
           labels=None,
   ):
-  ``` 중략 ```
+  --- 중략 ---
   ```
 
 
