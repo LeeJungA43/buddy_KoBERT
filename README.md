@@ -28,7 +28,7 @@ buddy_KoBERT
 Data 전처리
 -------------
 ### KoBERT Text Classification
-```
+```python
 class KoBERTforSequenceClassfication(BertPreTrainedModel):
   def __init__(self,
                 num_labels = 359,
