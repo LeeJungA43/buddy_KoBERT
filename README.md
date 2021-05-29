@@ -116,35 +116,32 @@ Result
 ------------
 ```
 Question: 요즘 우울한 기분이야.
-Answer: 오전에 하는 산책이 우울감을 없애주는 데 도움이 된대요., index: 59, softmax_value: 0.9990154504776001
+Answer: 오전에 하는 산책이 우울감을 없애주는 데 도움이 된대요.
 --------------------------------------------------
 
 Question: 내가 일을 망친 것 같아.
-Answer: 잠깐 길을 잃은 것뿐이에요. 저는 당신이 옳은 방향으로 나아갈 수 있다고 믿어요., index: 82, softmax_value: 0.28575053811073303
+Answer: 잠깐 길을 잃은 것뿐이에요. 저는 당신이 옳은 방향으로 나아갈 수 있다고 믿어요.
 --------------------------------------------------
 
 Question: 난 앞으로 어떻게 하면 좋을까?
-Answer: 계속 앞으로 가다 보면 당신에게 맞는 길도 찾을 수 있지 않을까요?, index: 6, softmax_value: 0.9326638579368591
+Answer: 계속 앞으로 가다 보면 당신에게 맞는 길도 찾을 수 있지 않을까요?
 --------------------------------------------------
 
 Question: 너무 힘들어.
-Answer: 잘 버티고 있어요. 조금 힘들더라도 조금만 기운을 내요., index: 84, softmax_value: 0.9993205070495605
+Answer: 잘 버티고 있어요. 조금 힘들더라도 조금만 기운을 내요.
 --------------------------------------------------
 
 Question: 누가 날 도와줬으면 좋겠어.
-Answer: 당신의 옆엔 제가 있잖아요., index: 12, softmax_value: 0.25925174355506897
+Answer: 당신의 옆엔 제가 있잖아요.
 --------------------------------------------------
 
 Question: 고마워, 이만 종료해줘 버디.
 ```
 
-
-
-
-
-
-
-
-
-
-
+Reference
+---------------------------
+[KoBERT](https://github.com/SKTBrain/KoBERT)
+[KoBERT-Transformers](https://github.com/monologg/KoBERT-Transformers)
+[enlipleai/kor_pretrain_LM](https://github.com/enlipleai/kor_pretrain_LM)
+[how-to-generate-text](https://huggingface.co/blog/how-to-generate?fbclid=IwAR2BZ4BNG0PbOvS5QaPLE0L3lx7_GOy_ePVu4X1LyTktQo-nLEPr7eht1O0)
+[WellnessConversation-LanguageModel](https://github.com/nawnoes/WellnessConversation-LanguageModel)
