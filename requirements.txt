@@ -1,0 +1,7 @@
+kobert-transformers==0.4.1
+transformers==3.0.2
+torch
+tokenizers==0.8.1rc1
+kss
+flask
+flask_restful
