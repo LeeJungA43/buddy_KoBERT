@@ -5,8 +5,10 @@ import random
 from model.kobert import KoBERTforSequenceClassfication, kobert_input
 from kobert_transformers import get_tokenizer
 
+#저장 위치에 따라 root_path 수정 필요!
+
 def load_wellness_answer():
-  root_path = "/content/drive/MyDrive/Colab Notebooks/buddy"
+  root_path = "./buddy"
   category_path = f"{root_path}/data/wellness_dialog_category.txt"
   answer_path = f"{root_path}/data/wellness_dialog_answer.txt"
 
@@ -33,7 +35,7 @@ def load_wellness_answer():
   return category, answer
 
 if __name__ == "__main__":
-  root_path = "/content/drive/MyDrive/Colab Notebooks/buddy"
+  root_path = "./buddy"
   checkpoint_path =f"{root_path}/checkpoint"
   save_ckpt_path = f"{checkpoint_path}/kobert-wellnesee-text-classification.pth"
 
