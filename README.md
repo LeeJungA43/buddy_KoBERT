@@ -4,9 +4,9 @@
 
 모델 학습 방법과 Flask API 적용 방법을 차례로 설명한다.
  
+* * *
  
- 
-# -01. KoBERT model 학습 방법
+# 01. KoBERT model 학습 방법
 
 개요
 --------------
@@ -153,3 +153,7 @@ Reference
 [how-to-generate-text](https://huggingface.co/blog/how-to-generate?fbclid=IwAR2BZ4BNG0PbOvS5QaPLE0L3lx7_GOy_ePVu4X1LyTktQo-nLEPr7eht1O0)
 
 [WellnessConversation-LanguageModel](https://github.com/nawnoes/WellnessConversation-LanguageModel)
+
+* * *
+
+# 02. Flask API 적용 방법
