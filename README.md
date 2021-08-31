@@ -1,12 +1,12 @@
-buddy_KoBERT
-===============================================
+# 00. buddy_KoBERT
+
 `huggingface transformers`, `pytorch`, `KoBERT Model`과 [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence)을 활용한 심리상담 모델이다.
 
 모델 학습 방법과 Flask API 적용 방법을 차례로 설명한다.
  
  
  
-## KoBERT model 학습 방법
+# -01. KoBERT model 학습 방법
 
 개요
 --------------
