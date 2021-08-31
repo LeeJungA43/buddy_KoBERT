@@ -226,6 +226,8 @@ Result
 <img src="/img/html.png" width="1000px" title="px(픽셀) 크기 설정" alt="HTML"></img><br/>
 
 
+Reference
+---------------------------
+[Flask를 사용한 기계 학습 프로젝트 배포][https://ichi.pro/ko/flaskleul-sayonghan-gigye-hagseub-peulojegteu-baepo-210480684925721]
 
-
-
+[Python 및 Flask로 딥 러닝 챗봇 만들기][https://ichi.pro/ko/python-mich-flasklo-dib-leoning-chaesbos-mandeulgi-236754009602090]
