@@ -166,6 +166,7 @@ Reference
 --------------
 ### 전제조건
  + Python 3
+ + Miniconda 가상환경 사용
  + pip install flask
  + pip install pickle
  + pip install jsonify
@@ -186,5 +187,34 @@ flask를 통해 API로 배포하려는 디렉토리에 다음과 같은 폴더�
 |___ app.py
 ```
 
+jquery.min.js 파일을 다운 받는 방법은 Static 폴더 안 read.md에 설명되어 있다.
 
+KoBERT model
+--------------
 
+학습된 chechpoint를 pickle 형태로 저장했다. 단, pickle 파일은 저장된 디렉토리 경로를 기억하므로 다른 환경에서 사용하려면 해당 환경에서 pickle 파일을 새로 만들어야 한다.
+
+buddy-pickle.ipynb 파일은 jupyter notebook으로 pickle 파일을 생성하는 과정과 .plk 파일로 불러온 모델이 잘 동작하는지 테스트하는 내용을 담고있다.
+
+index.html
+--------------
+
+HTML 파일로 실제 구동되는 웹페이지의 형태와 구동방식을 설정한 프런트 엔드 파일이다. Bubby는 채팅봇이므로 문장을 넣을 수 있는 칸과 submit 버튼이 존재하며, 아래에 대화 내용이 기록된다.
+
+app.py
+--------------
+
+API를 실행시키는 python 파일이다. 학습된 model을 pickle로 저장한 뒤 사용하였다.
+
+API 실행
+--------------
+
+Miniconda 가상환경을 실행시키고 Buddy 파일(*해당 GitHub 자료를 저장한 전체 폴더이다*)로 들어간 후, app.py를 실행시킨다.
+
+```
+> python app.py
+```
+
+파일을 실행시키면 잠시 후 구동이 되며 http 주소가 출력된다. 해당 주소로 접속하면 페이지가 구동되는 것을 확인할 수 있다.
+
+ctrl+c를 누르면 구동이 종료된다.
