@@ -3,13 +3,9 @@
 `huggingface transformers`, `pytorch`, `KoBERT Model`과 [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence)을 활용한 심리상담 모델이다.
 
 모델 학습 방법과 Flask API 적용 방법을 차례로 설명한다.
-   
-   
-   
+
 * * *
-    
-   
-   
+
 # 01. KoBERT model 학습 방법
 
 개요
@@ -157,11 +153,38 @@ Reference
 [how-to-generate-text](https://huggingface.co/blog/how-to-generate?fbclid=IwAR2BZ4BNG0PbOvS5QaPLE0L3lx7_GOy_ePVu4X1LyTktQo-nLEPr7eht1O0)
 
 [WellnessConversation-LanguageModel](https://github.com/nawnoes/WellnessConversation-LanguageModel)
-   
-   
-   
+
 * * *
-   
-   
-   
+
 # 02. Flask API 적용 방법
+
+개요
+--------------
+학습돤 KoBERT 모델을 **pickle 형태**로 저장 후 **Flask**를 사용하여 **API 형태**로 배포한다.
+
+환경
+--------------
+### 전제조건
+ + Python 3
+ + pip install flask
+ + pip install pickle
+ + pip install jsonify
+ + 등등 이 외에도 코드를 돌리다 존재하지 않는다는 패키지는 설치해야 한다.
+
+디렉토리 파일
+--------------
+flask를 통해 API로 배포하려는 디렉토리에 다음과 같은 폴더와 .py 파일이 존재해야 한다.
+
+```
+|
+| ... (기타 폴더 및 파일들)
+| 
+|___ static
+|      |___ jquery.min.js
+|___ templates
+|      |___ index.html
+|___ app.py
+```
+
+
+
