@@ -4,7 +4,7 @@ buddy_KoBERT
 
 모델 학습 방법과 Flask API 적용 방법을 차례로 설명한다.
  
-#KoBERT model 학습 방법
+# KoBERT model 학습 방법
 
 개요
 --------------
