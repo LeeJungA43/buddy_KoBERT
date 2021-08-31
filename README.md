@@ -21,7 +21,9 @@
  + Colab pro
 
 ### Data
- + [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence): AIhub 가입 및 신청 후 승인되면 다운로드가 가능하다.
+ AIhub 가입 및 신청 후 승인되면 다운로드가 가능하다.
+ + [AI허브 웰니스 스트립트 데이터셋](https://aihub.or.kr/keti_data_board/language_intelligence)
+ + [AI허브 감성 대화 말뭉치](https://aihub.or.kr/aidata/7978)
 
 ### Package
  + kobert-transformers
