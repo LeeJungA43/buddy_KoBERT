@@ -1,3 +1,5 @@
+# Buddy 챗봇 모델을 API 형태로 발행할 때 필요한 py 파일
+
 import os
 import sys
 import torch
