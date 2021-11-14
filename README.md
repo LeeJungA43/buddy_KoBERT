@@ -37,7 +37,7 @@ Data 전처리
 ```python
 class KoBERTforSequenceClassfication(BertPreTrainedModel):
   def __init__(self,
-                num_labels = 359,
+                num_labels = 150,
                 hidden_size = 768,
                 hidden_dropout_prob = 0.1,
                ):
