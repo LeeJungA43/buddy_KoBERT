@@ -222,11 +222,9 @@ jquery.min.js 파일을 다운 받는 방법은 Static 폴더 안 read.md에 설
  setx FLASK_APP buddy.py
  setx FLASK_DEBUG 1
 
- """
  # Rinux 환경에서 flask app 파일과, 디버그 모드 설정
  set FLASK_APP=buddy.py
  set FLASK_DEBUG=1
- """
  ```
 - flask run으로 실행시킨다.
 -
