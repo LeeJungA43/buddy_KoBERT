@@ -170,7 +170,6 @@ Reference
  + Python 3
  + Miniconda 가상환경 사용
  + pip install flask
- + pip install pickle
  + pip install jsonify
  + 등등 이 외에도 코드를 돌리다 존재하지 않는다는 패키지는 설치해야 한다.
 
@@ -196,28 +195,48 @@ jquery.min.js 파일을 다운 받는 방법은 Static 폴더 안 read.md에 설
 --------------
  #### KoBERT 모델
 
- - 학습된 chechpoint를 pickle 형태로 저장하여 사용한다. 단, pickle 파일은 저장된 디렉토리 경로를 기억하므로 다른 환경에서 사용하려면 해당 환경에서 pickle 파일을 새로 만들어야 한다.
+ - 학습된 chechpoint를 Pytorch파일인 .pth 형태로 사용한다.
 
- - buddy-pickle.ipynb 파일은 jupyter notebook으로 pickle 파일을 생성하는 과정과 .plk 파일로 불러온 모델이 잘 동작하는지 테스트하는 내용을 담고있다.
 
  #### index.html
 
  - HTML 파일로 실제 구동되는 웹페이지의 형태와 구동방식을 설정한 프런트 엔드 파일이다. Bubby는 채팅봇이므로 문장을 넣을 수 있는 칸과 submit 버튼이 존재하며, 아래에 대화 내용이 기록된다.
 
+ - Buddy는 API와 Raspberry Pi간 통신으로 구동되는 실물 스피커를 목표로 하기 때문에, index.html 파일은 최소한의 성능체크만 할 수 있게 해두었다.
+
  #### app.py
 
- - API를 실행시키는 python 파일이다. 학습된 model을 pickle로 저장한 뒤 사용하였다.
+ - API를 실행시키는 python 파일이다. 학습된 .pth model을 불러와 동작한다.
 
  API 실행
  --------------
 
- - Miniconda 가상환경을 실행시키고 Buddy 파일(*해당 GitHub 자료를 저장한 전체 폴더이다*)로 들어간 후, app.py를 실행시킨다.
+ - [Microsoft Azure Portal을 통해 falsk API로 배포하기](https://lee-jung-ah.tistory.com/2) (자세한 설명)
+ 
+ - Miniconda 가상환경을 실행시키고 Buddy 파일(*해당 GitHub 자료를 저장한 전체 폴더이다*)로 이동한다.
+ 
+ - app.py를 flask_app으로 설정하고 가상환경 창을 종료했다 재시작한다.
 
  ```
-  python app.py
+ # Window 환경에서 flask app 파일과, 디버그 모드 설정
+ setx FLASK_APP buddy.py
+ setx FLASK_DEBUG 1
+
+ """
+ # Rinux 환경에서 flask app 파일과, 디버그 모드 설정
+ set FLASK_APP=buddy.py
+ set FLASK_DEBUG=1
+ """
+ ```
+- flask run으로 실행시킨다.
+-
+ ```
+  flask run --host=0.0.0.0
  ```
 
- - 파일을 실행시키면 잠시 후 구동이 되며 http 주소가 출력된다. 해당 주소로 접속하면 페이지가 구동되는 것을 확인할 수 있다.
+ - 잠시 후 구동이 되며 http 주소가 출력된다. 해당 주소로 접속하면 페이지가 구동되는 것을 확인할 수 있다.
+
+ - 이때 출력되는 것은 private IP 이므로, 다른 컴퓨터에서 사용하려면 port를 열고 공용주소를 사용해야 한다.
 
  - ctrl+c를 누르면 구동이 종료된다.
  
