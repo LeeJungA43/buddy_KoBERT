@@ -240,7 +240,7 @@ jquery.min.js 파일을 다운 받는 방법은 Static 폴더 안 read.md에 설
  
 Result
 --------------
-
+<img src="/img/miniconda.png" width="650px" title="px(픽셀) 크기 설정" alt="Miniconda"></img><br/>
 
 <img src="/img/html.png" width="1000px" title="px(픽셀) 크기 설정" alt="HTML"></img><br/>
 
