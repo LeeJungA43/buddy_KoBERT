@@ -35,7 +35,7 @@ app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'enter-a-very-secretive-key-3479373'
 
 # Azure Speech 서비스 key와 지역 할당
-speech_key, service_region = "c248d3d2b78b4c9593fcc445d92a5bbf", "koreacentral"
+speech_key, service_region = "<YOUR KEY>", "koreacentral"
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
 # STT/TTS 사전 설정. 한국어와 여성의 음성을 선택
@@ -43,7 +43,7 @@ speech_config.speech_synthesis_language = "ko-KR"
 speech_config.speech_synthesis_voice_name = "ko-KR-SunHiNeural"
 
 # Face Recogntion
-KEY = "78e66db7985640969a6bf1946025cdb5"
+KEY = "<YOUR KEY>"
 CF.Key.set(KEY)
 BASE_URL = 'https://koreacentral.api.cognitive.microsoft.com/face/v1.0/'
 CF.BaseUrl.set(BASE_URL)
