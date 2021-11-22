@@ -8,8 +8,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import bson
+import base64
 from tqdm import tqdm
-from flask import Flask, render_template, request, jsonify, make_response
+from flask import Flask, render_template, request, jsonify, json, Response, make_response
 from flask_mobility import Mobility
 
 import azure.cognitiveservices.speech as speechsdk
@@ -35,7 +36,7 @@ app = Flask(__name__)
 #app.config['SECRET_KEY'] = 'enter-a-very-secretive-key-3479373'
 
 # Azure Speech 서비스 key와 지역 할당
-speech_key, service_region = "<YOUR KEY>", "koreacentral"
+speech_key, service_region = "<YOUR API KEY>", "koreacentral"
 speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
 
 # STT/TTS 사전 설정. 한국어와 여성의 음성을 선택
@@ -43,7 +44,7 @@ speech_config.speech_synthesis_language = "ko-KR"
 speech_config.speech_synthesis_voice_name = "ko-KR-SunHiNeural"
 
 # Face Recogntion
-KEY = "<YOUR KEY>"
+KEY = "<YOUR API KEY>"
 CF.Key.set(KEY)
 BASE_URL = 'https://koreacentral.api.cognitive.microsoft.com/face/v1.0/'
 CF.BaseUrl.set(BASE_URL)
@@ -134,11 +135,13 @@ def standby():
         bad_expression = anger + contempt + disgust + fear + sadness
 
         if happiness < bad_expression:  # 우울해 보일 때
-            # 무슨 일이 있으신가요? 기분이 안좋아보여요. 제가 도울 수 있는게 있으면 말해주세요.
-            # play_audio("./audio/
             state = state + 0.1 # 잘못 체크 할 수도 있으니 약간만 증가
-            return jsonify({"response": "무슨 일이 있으신가요? 기분이 안좋아보여요. 제가 도울 수 있는게 있으면 말해주세요.",
-                            "run_check": "1", "state": str(state)})
+            # 무슨 일이 있으신가요? 기분이 안좋아보여요. 제가 도울 수 있는게 있으면 말해주세요.
+            open_read = open('./audio/Opening.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "1", "state": str(state)}
+
+            return Response(json.dumps(dict_data), mimetype='text/plain')
         else:  # 우울해 보이지 않을 땐 버디 이름을 부를때까지 대기
             audio_input = speechsdk.AudioConfig(filename="./audio/user_voice.wav")
             speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config,
@@ -146,11 +149,18 @@ def standby():
             the_question = speech_recognizer.recognize_once_async().get()
             if '버디' in the_question.text:  # 이름을 불렀을 때
                 # 네, 부르셨나요?
-                # play_audio("./audio/call_name.wav")
-                return jsonify({"response": "네, 부르셨나요?", "run_check": "1", "state": str(state)})
+                open_read = open('./audio/call_name.wav', 'rb').read()
+                encoded = base64.b64encode(open_read)
+                dict_data = {"response": str(encoded), "run_check": "1", "state": str(state)}
 
-        # 마찬가지로 json 형식으로 return
-        return jsonify({"response": "대기", "run_check": "0", "state": str(state)})
+                return Response(json.dumps(dict_data), mimetype='text/plain')
+
+        # 아무런 말이 없을 때는 무음 wav를 return한다 (형식을 맞추기 위함)
+        open_read = open('./audio/silence.wav', 'rb').read()
+        encoded = base64.b64encode(open_read)
+        dict_data = {"response": str(encoded), "run_check": "0", "state": str(state)}
+
+        return Response(json.dumps(dict_data), mimetype='text/plain')
 
 # 본격적인 대화 부분
 @app.route('/chatbot', methods=["GET", "POST"])
@@ -190,24 +200,44 @@ def chatbotResponse():
         speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config,
                                                            language="ko-KR", audio_config=audio_input)
         the_question = speech_recognizer.recognize_once_async().get()
-        print(the_question.text)
 
         if '종료' in the_question.text:  # 종료를 원할 때
             # 네. 종료하겠습니다.
-            return jsonify({"response": "네. 종료하겠습니다.", "run_check": "0", "state": str(0),
-                            "silence": str(silence), "music": str(0)})
+            open_read = open('./audio/end.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "0", "state": str(0),
+                         "silence": str(0), "music": str(0)}
+
+            return Response(json.dumps(dict_data), mimetype='text/plain')
 
         elif '음악' in the_question.text:  # 음악 재생을 바랄 때
             # 음악을 재생합니다.
-            return jsonify({"response": "음악을 재생합니다.", "run_check": "0", "state": str(0),
-                            "silence": str(silence), "music": str(1)})
+            open_read = open('./audio/music_start.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "0", "state": str(0),
+                         "silence": str(0), "music": str(1)}
 
-        elif state > 10:  # 기준 수치 초과
+            return Response(json.dumps(dict_data), mimetype='text/plain')
+
+        elif state >= 10.0 :  # 기준 수치 초과
             # 마음이 소란 스러울 때, 듣기 좋은 음악을 들어보시는 건 어떤가요? 원하신다면 음악 틀어줘, 라고 말해주세요.
-            return jsonify({"response": "마음이 소란 스러울 때, 듣기 좋은 음악을 들어보시는 건 어떤가요? 원하신다면 음악 틀어줘, 라고 말해주세요",
-                            "run_check": "1", "state": str(state), "silence": str(silence), "music": str(0)})
+            open_read = open('./audio/suggestion.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "1", "state": str(state),
+                         "silence": str(silence), "music": str(0)}
 
-        elif len(str(the_question.text)) > 0: # 음성이 녹음되어 있을 때
+            return Response(json.dumps(dict_data), mimetype='text/plain')
+
+        elif len(str(the_question.text)) <= 1: # 사용자가 침묵하고 있을 때
+            silence = silence + 1
+            open_read = open('./audio/silence.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "1", "state": str(state),
+                         "silence": str(silence), "music": str(0)}
+
+            return Response(json.dumps(dict_data), mimetype='text/plain')
+
+        else : # 음성이 녹음되어 있을 때
             data = kobert_input(tokenizer, str(the_question.text), device, 512)
 
             output = model(**data)
@@ -226,36 +256,17 @@ def chatbotResponse():
             response = answer_list[answer_index]
             state = state + 1
 
-            return jsonify({"response": response, "run_check": "1", "state": str(state),
-                            "silence": str(silence), "music": str(0)})
+            # TTS API로 음성 답변 생성
+            audio_config = AudioOutputConfig(filename="./audio/response.wav")
+            synthesizer = SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
+            synthesizer.speak_text_async(response)
 
-        else:
-            silence = silence + 1
-            return jsonify({"response": "대기합니다.", "run_check": "1", "state": str(state),
-                            "silence": str(silence), "music": str(0)})
+            open_read = open('./audio/response.wav', 'rb').read()
+            encoded = base64.b64encode(open_read)
+            dict_data = {"response": str(encoded), "run_check": "1", "state": str(state),
+                         "silence": str(silence), "music": str(0)}
 
-# wav 받고 wav 전송하기
-@app.route('/test5', methods=["GET", "POST"])
-def test5():
-    if request.method == 'POST': #post 방식으로 전송될 경우
-        binary_data = {}
-        the_files = request.files
-        for file in the_files:
-            binary_data[file] = the_files[file].read()
-
-        f1 = open('C:/buddy/test.wav', 'wb')
-        f1.write(binary_data['wave'])
-        f1.close()
-
-        f1 = open('./audio/check_voice.wav', 'rb')
-        wav_data = f1.read()
-        f1.close()
-
-        # make_response 사용
-        response = make_response(wav_data, 200)  # 파일 데이터 저장
-        #response.mimetype = 'audio/wav'
-
-        return response
+            return Response(json.dumps(dict_data), mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000', debug=True)
